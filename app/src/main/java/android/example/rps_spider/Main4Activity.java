@@ -16,6 +16,20 @@ import java.util.Random;
 
 public class Main4Activity extends AppCompatActivity {
 
+    private static final int TIME_INTERVAL = 2000;
+    private long mBackPressed;
+
+    @Override
+    public void onBackPressed() {
+        if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
+            super.onBackPressed();
+            return;
+        } else {
+            Toast.makeText(getBaseContext(), "Click two times to quit", Toast.LENGTH_SHORT).show();
+        }
+        mBackPressed = System.currentTimeMillis();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +49,7 @@ public class Main4Activity extends AppCompatActivity {
 
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
         ImageView imageView3 = (ImageView) findViewById(R.id.imageView3);
+        ImageView imageView2 = (ImageView) findViewById(R.id.imageView2);
 
         if(globalClass.getModeOfGame() == true) {
 
@@ -67,17 +82,20 @@ public class Main4Activity extends AppCompatActivity {
                 Toast toast = Toast.makeText(getApplicationContext(), globalClass.getWinner() + "WINS", Toast.LENGTH_SHORT);
                 toast.show();
                 textView14.setText(String.format("%sWINS", globalClass.getWinner()));
+                imageView2.setImageDrawable(getResources().getDrawable(R.drawable.congrats));
 
-            } else if (globalClass.getPlayer2Score() < globalClass.getPlayer2Score()) {
+            } else if (globalClass.getPlayer1Score() < globalClass.getPlayer2Score()) {
                 globalClass.setWinner(globalClass.getPlayer2Name());
                 Toast toast = Toast.makeText(getApplicationContext(), globalClass.getWinner() + "WINS", Toast.LENGTH_SHORT);
                 toast.show();
                 textView14.setText(String.format("%sWINS", globalClass.getWinner()));
+                imageView2.setImageDrawable(getResources().getDrawable(R.drawable.congrats));
 
             } else if(globalClass.getPlayer1Score() == globalClass.getPlayer2Score()){
                 Toast toast = Toast.makeText(getApplicationContext(), "DRAW", Toast.LENGTH_SHORT);
                 toast.show();
                 textView14.setText("DRAW");
+                imageView2.setImageDrawable(getResources().getDrawable(R.drawable.lost));
 
             }
 
@@ -116,10 +134,12 @@ public class Main4Activity extends AppCompatActivity {
 
                         Intent intent = new Intent(Main4Activity.this,MainActivity.class);
                         startActivity(intent);
+                        finish();
                     }
                     else{
                         Intent intent = new Intent(Main4Activity.this,Main3Activity.class);
                         startActivity(intent);
+                        finish();
                     }
                 }
             });
@@ -163,19 +183,22 @@ public class Main4Activity extends AppCompatActivity {
                 Toast toast = Toast.makeText(getApplicationContext(), globalClass.getWinner() + "WINS", Toast.LENGTH_SHORT);
                 toast.show();
                 textView14.setText(globalClass.getWinner());
+                imageView2.setImageDrawable(getResources().getDrawable(R.drawable.congrats));
+
             }
             else if(globalClass.getSinglePlayerScore() < globalClass.getBotScore()){
                 globalClass.setWinner("BOT");
                 Toast toast = Toast.makeText(getApplicationContext(), globalClass.getWinner() + "WINS", Toast.LENGTH_SHORT);
                 toast.show();
                 textView14.setText(globalClass.getWinner());
+                imageView2.setImageDrawable(getResources().getDrawable(R.drawable.lost));
 
             }
             else{
                 Toast toast = Toast.makeText(getApplicationContext(), "DRAW", Toast.LENGTH_SHORT);
                 toast.show();
                 textView14.setText("DRAW");
-
+                imageView2.setImageDrawable(getResources().getDrawable(R.drawable.lost));
             }
 
             textView18.setText(globalClass.getSinglePlayerName());
@@ -203,6 +226,8 @@ public class Main4Activity extends AppCompatActivity {
                 imageView3.setImageDrawable(getResources().getDrawable(R.drawable.scissor));
             }
 
+
+
             button4.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view){
@@ -213,10 +238,12 @@ public class Main4Activity extends AppCompatActivity {
 
                         Intent intent = new Intent(Main4Activity.this,MainActivity.class);
                         startActivity(intent);
+                        finish();
                     }
                     else{
                         Intent intent = new Intent(Main4Activity.this,multiplayer1.class);
                         startActivity(intent);
+                        finish();
                     }
                 }
             });

@@ -10,15 +10,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".modeOfGameName"></activity>
-        <activity android:name=".Multiplayer2" />
-        <activity android:name=".multiplayer1" />
-        <activity android:name=".modeOfGame" />
-        <activity android:name=".Main5Activity" />
-        <activity android:name=".Main4Activity" />
-        <activity android:name=".Main3Activity" />
-        <activity android:name=".Main2Activity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".modeOfGameName"
+                  android:noHistory="true"/>
+        <activity android:name=".multiplayer1"
+                  android:noHistory="true"/>
+        <activity android:name=".modeOfGame"
+                  android:noHistory="true"/>
+        <activity android:name=".Main5Activity"
+                  android:noHistory="true"/>
+        <activity android:name=".Main4Activity"
+                  android:noHistory="true"/>
+        <activity android:name=".Main3Activity"
+                  android:noHistory="true"/>
+        <activity android:name=".Main2Activity"
+                  android:noHistory="true"/>
+        <activity android:name=".MainActivity"
+                  android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

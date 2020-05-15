@@ -7,8 +7,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class modeOfGame extends AppCompatActivity {
+
+    private static final int TIME_INTERVAL = 2000;
+    private long mBackPressed;
+
+    @Override
+    public void onBackPressed() {
+        if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
+            super.onBackPressed();
+            return;
+        } else {
+            Toast.makeText(getBaseContext(), "Click two times to quit", Toast.LENGTH_SHORT).show();
+        }
+        mBackPressed = System.currentTimeMillis();
+    }
 
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -55,9 +70,12 @@ public class modeOfGame extends AppCompatActivity {
             @Override
             public void onClick(View view){
 
+                globalClass.setModeOfGame(false);
+
                 Intent intent = new Intent(modeOfGame.this,modeOfGameName.class);
                 startActivity(intent);
-                globalClass.setModeOfGame(false);
+                finish();
+
 
 
             }
@@ -67,9 +85,12 @@ public class modeOfGame extends AppCompatActivity {
             @Override
             public void onClick(View view){
 
+                globalClass.setModeOfGame(true);
+
                 Intent intent = new Intent(modeOfGame.this,Main5Activity.class);
                 startActivity(intent);
-                globalClass.setModeOfGame(true);
+                finish();
+
 
 
             }

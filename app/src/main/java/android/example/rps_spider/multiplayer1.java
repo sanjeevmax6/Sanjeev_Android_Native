@@ -7,10 +7,25 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import java.util.Random;
 
 public class multiplayer1 extends AppCompatActivity {
+
+    private static final int TIME_INTERVAL = 2000;
+    private long mBackPressed;
+
+    @Override
+    public void onBackPressed() {
+        if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
+            super.onBackPressed();
+            return;
+        } else {
+            Toast.makeText(getBaseContext(), "Click two times to quit", Toast.LENGTH_SHORT).show();
+        }
+        mBackPressed = System.currentTimeMillis();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +60,7 @@ public class multiplayer1 extends AppCompatActivity {
 
                 Intent intent = new Intent(multiplayer1.this,Main4Activity.class);
                 startActivity(intent);
+                finish();
 
             }
         });
@@ -67,6 +83,7 @@ public class multiplayer1 extends AppCompatActivity {
 
                 Intent intent = new Intent(multiplayer1.this,Main4Activity.class);
                 startActivity(intent);
+                finish();
 
             }
         });
@@ -89,6 +106,7 @@ public class multiplayer1 extends AppCompatActivity {
 
                 Intent intent = new Intent(multiplayer1.this,Main4Activity.class);
                 startActivity(intent);
+                finish();
 
             }
         });

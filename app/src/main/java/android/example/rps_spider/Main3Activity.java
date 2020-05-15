@@ -9,8 +9,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Main3Activity extends AppCompatActivity {
+
+    private static final int TIME_INTERVAL = 2000;
+    private long mBackPressed;
+
+    @Override
+    public void onBackPressed() {
+        if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
+            super.onBackPressed();
+            return;
+        } else {
+            Toast.makeText(getBaseContext(), "Click two times to quit", Toast.LENGTH_SHORT).show();
+        }
+        mBackPressed = System.currentTimeMillis();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +52,9 @@ public class Main3Activity extends AppCompatActivity {
 
                 globalClass.setPlayer1Choice("ROCK");
 
-
-
-
                 Intent intent = new Intent(Main3Activity.this,Main2Activity.class);
                 startActivity(intent);
+                finish();
 
             }
         });
@@ -52,11 +65,9 @@ public class Main3Activity extends AppCompatActivity {
 
                 globalClass.setPlayer1Choice("PAPER");
 
-
-
-
                 Intent intent = new Intent(Main3Activity.this,Main2Activity.class);
                 startActivity(intent);
+                finish();
 
             }
         });
@@ -67,11 +78,9 @@ public class Main3Activity extends AppCompatActivity {
 
                 globalClass.setPlayer1Choice("SCISSOR");
 
-
-
-
                 Intent intent = new Intent(Main3Activity.this,Main2Activity.class);
                 startActivity(intent);
+                finish();
 
             }
         });

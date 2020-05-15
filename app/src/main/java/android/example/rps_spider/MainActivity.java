@@ -10,10 +10,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.text.ParseException;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+    private static final int TIME_INTERVAL = 2000;
+    private long mBackPressed;
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -52,12 +57,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
 
 
-
         Button button = (Button) findViewById(R.id.button);
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
 
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String> (MainActivity.this,
-                android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.numbers));
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(MainActivity.this,
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.numbers));
         myAdapter.setDropDownViewResource((android.R.layout.simple_spinner_dropdown_item));
         spinner.setAdapter(myAdapter);
 
@@ -65,10 +69,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
 
-                Intent intent = new Intent(MainActivity.this,modeOfGame.class);
+                Intent intent = new Intent(MainActivity.this, modeOfGame.class);
                 startActivity(intent);
+                finish();
 
 
             }
@@ -87,5 +92,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
+            super.onBackPressed();
+            return;
+        } else {
+            Toast.makeText(getBaseContext(), "Click two times to quit", Toast.LENGTH_SHORT).show();
+        }
+        mBackPressed = System.currentTimeMillis();
     }
 }
